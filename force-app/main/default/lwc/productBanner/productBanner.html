@@ -1,0 +1,26 @@
+<template>
+<lightning-layout multiple-rows>
+    <!-- Top -->
+    <lightning-layout-item size="12">
+        <lightning-card title="Refine Product Search">
+            <lightning-button
+                variant="normal"
+                label="New Product"
+                slot="actions"
+                onclick={createNewProduct}
+            ></lightning-button>
+            <p class="slds-var-p-horizontal_small slds-align_absolute-center">
+                <c-product-search-form oncategorychanged={getProductsByCategory}>
+                </c-product-search-form>
+            </p>
+        </lightning-card>
+    </lightning-layout-item>
+    <!-- Bottom -->
+    <lightning-layout-item size="12" class="slds-p-top_small slds-is-relative">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+            </template>
+            <c-product-list onloading={handleLoading} ondoneloading={handleDoneLoading} ></c-product-list>
+    </lightning-layout-item>
+</lightning-layout>
+</template>
