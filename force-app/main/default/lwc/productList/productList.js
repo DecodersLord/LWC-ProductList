@@ -54,17 +54,45 @@ const COLUMNS = [
 export default class ProductList extends NavigationMixin(LightningElement) {
     columns = COLUMNS;
     productCategory = 'All Types';
-    @track products;
+    @track productsMapByCategory = [];
 
     @wire(getProducts, {productCategory: '$productCategory'})
     wiredProducts({data, error}){
         if(data){
-            this.products = data;
+            this.productsMapByCategory = this.groupProductsByCategory(data);
+            console.log(this.productsMapByCategory);
         }
         else if(error){
             return (this.contacts.error) ? reduceErrors(this.contacts.error) : [];
             
         }
+    }
+
+
+    groupProductsByCategory(products){
+        let productsMap = new Map();
+        for(let product of products){
+            if(!productsMap.has(product.Family)){
+                productsMap.set(product.Family, [product]);
+            }
+            else{
+                productsMap.get(product.Family).push(product);  
+            }
+        }
+
+        let result = [];
+        productsMap.forEach((value, key) => {
+            result.push({
+                key: key,
+                value: value,
+            })
+        })
+        console.log(result);
+        return result;
+    }
+
+    get productsMapEntries() {
+        return Array.from(this.productsMap.entries());
     }
 
     @api

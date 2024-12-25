@@ -1,16 +1,22 @@
 <template>
     <lightning-card>
-        <template if:true={products}>
-            <lightning-datatable 
-                key-field="Id"
-                data={products}
-                hide-checkbox-column
-                column-widths-mode="auto"
-                columns={columns}
-                onrowaction={handleRowAction}
-            >
-            </lightning-datatable>
-        </template>
+            <template for:each={productsMapByCategory} for:item="category">
+                <lightning-accordion key={category.key} allow-multiple-sections-open>
+                        <lightning-accordion-section name={category.key} label={category.key}>
+                            <lightning-datatable 
+                                key-field="Id"
+                                data={category.value}
+                                hide-checkbox-column
+                                column-widths-mode="auto"
+                                columns={columns}
+                                onrowaction={handleRowAction}
+                            >
+                            </lightning-datatable>
+                        </lightning-accordion-section> 
+                </lightning-accordion>
+            </template>
+
+
         <template if:true={errors}>
             <p> {errors} </p>
         </template>
