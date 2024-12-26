@@ -21,13 +21,13 @@ export default class ProductBanner extends NavigationMixin(LightningElement) {
     }
     
     createNewProduct() { 
-        this[NavigationMixin.Navigate]({
-            type: 'standard__objectPage',
-            attributes: {
-                objectApiName: 'Product2',
-                actionName: 'new'
-            }
-        });
+
+        const productList = this.template.querySelector('c-product-list');
+        if (productList) {
+            productList.handleModalPopUp(true);
+        } else {
+            console.error('c-product-list not found');
+        }
     }
 
 

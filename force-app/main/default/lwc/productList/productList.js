@@ -55,6 +55,7 @@ export default class ProductList extends NavigationMixin(LightningElement) {
     columns = COLUMNS;
     productCategory = 'All Types';
     @track productsMapByCategory = [];
+    @track showModalPopup = false;
 
     @wire(getProducts, {productCategory: '$productCategory'})
     wiredProducts({data, error}){
@@ -99,6 +100,16 @@ export default class ProductList extends NavigationMixin(LightningElement) {
     searchProductsByCategory(productCategory){
         console.log(productCategory);
         this.productCategory = productCategory;
+    }
+
+    @api
+    handleModalPopUp(showModal){
+        console.log(showModal);
+        this.showModalPopup = showModal;
+    }
+
+    handleClose(){
+        this.showModalPopup = false;
     }
 
     handleRowAction(event){
