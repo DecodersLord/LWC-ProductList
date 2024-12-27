@@ -1,4 +1,4 @@
-import { createElement } from 'lwc';
+import { createElement } from 'lwc/';
 import ProductSearchForm from 'c/productSearchForm';
 
 describe('c-product-search-form', () => {

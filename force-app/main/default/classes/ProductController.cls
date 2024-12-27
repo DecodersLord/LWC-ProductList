@@ -2,13 +2,16 @@ public with sharing class ProductController {
     
     @AuraEnabled(cacheable=true)
     public static List<Product2> getProducts(String productCategory){
+        String queryString = 'SELECT Id, Name, Family, ProductCode,Price__c FROM Product2 ';    
+
         try {
             if(productCategory == 'All Types'){
-                return [SELECT Id, Name, Family,StockKeepingUnit, ProductCode FROM Product2 WITH SECURITY_ENFORCED];
+                queryString += 'WITH SECURITY_ENFORCED';
             }
             else{
-                return [SELECT Id, Name, Family,StockKeepingUnit, ProductCode FROM Product2 WHERE Family = :productCategory WITH SECURITY_ENFORCED];
+                queryString += 'WHERE Family = :productCategory WITH SECURITY_ENFORCED';
             }
+            return Database.query(queryString);
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
@@ -20,7 +23,6 @@ public with sharing class ProductController {
         try {
             List<AggregateResult> results = [SELECT Family FROM Product2 WITH SECURITY_ENFORCED GROUP BY Family ORDER BY Family ASC];
         
-            // Extracting the Family values into the categories list
             for (AggregateResult result : results) {
                 categories.add((String)result.get('Family'));
             }
@@ -29,5 +31,16 @@ public with sharing class ProductController {
         }
 
         return categories;
+    }
+
+    @AuraEnabled
+    public static void deleteRecord(String productId){
+        System.debug(productId);
+        try {
+            Product2 productToBeDeleted = [SELECT Id from Product2 WHERE Id =: productId WITH SECURITY_ENFORCED];
+            delete productToBeDeleted;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
     }
 }

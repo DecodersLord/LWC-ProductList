@@ -24,7 +24,7 @@ export default class ProductBanner extends NavigationMixin(LightningElement) {
 
         const productList = this.template.querySelector('c-product-list');
         if (productList) {
-            productList.handleModalPopUp(true);
+            productList.handleModalPopUp(true, null);
         } else {
             console.error('c-product-list not found');
         }
