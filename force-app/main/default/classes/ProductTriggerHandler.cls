@@ -17,4 +17,9 @@ public with sharing class ProductTriggerHandler {
             
         }
     }
+
+    public static void handleNullProductCode(Product2 newProduct){
+        System.debug('here ' + newProduct);
+        newProduct.ProductCode.addError('Product Code is Mandatory');
+    }
 }

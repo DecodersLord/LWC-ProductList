@@ -1,5 +1,10 @@
 trigger ProductTrigger on Product2 (before insert, before update) {
     if(Trigger.isBefore){
+        for(Product2 newProduct : Trigger.new){
+            if(newProduct.ProductCode == null || newProduct.ProductCode == ''){
+                ProductTriggerHandler.handleNullProductCode(newProduct);
+            }
+        }
         if(Trigger.isInsert){
             ProductTriggerHandler.checkForDuplicate(Trigger.new);
         }

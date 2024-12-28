@@ -2,12 +2,6 @@ import { LightningElement } from 'lwc';
 import { NavigationMixin} from 'lightning/navigation';
 
 export default class ProductBanner extends NavigationMixin(LightningElement) {
-    isLoading = false;
-    
-    handleLoading() { }
-    
-    handleDoneLoading() { }
-    
     getProductsByCategory(event) {
         const productCategory = event.detail.category;
         console.log('Product Category:', productCategory);
