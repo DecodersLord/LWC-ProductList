@@ -13,4 +13,3 @@
 
 - View Product can be handled by record-edit-form in a read-only format instead of Navigation Mixing.
 - Possibility to add sort/search based on Product Name/Code/Price.
-- 
