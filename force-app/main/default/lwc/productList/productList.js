@@ -102,12 +102,13 @@ export default class ProductList extends NavigationMixin(LightningElement) {
         return result;
     }
 
-    handleRecordDelete(recordId){
-        console.log('recordId:', recordId);
-        if(recordId){
-            deleteRecord({productId : recordId})
+    handleRecordDelete(record){
+        console.log('recordId:', record.Id);
+        console.log(JSON.parse(JSON.stringify(record)));
+        if(record.Id){
+            deleteRecord({productId : record.Id})
             .then(() => {
-                this.showSuccessToast(`Record ${recordId} has been deleted.`);
+                this.showSuccessToast(`Record ${record.Name} has been deleted.`);
             })
             .catch(error => {
                 this.showErrorToast(error.body.message);
@@ -154,7 +155,7 @@ export default class ProductList extends NavigationMixin(LightningElement) {
         this.productCategory = productCategory;
     }
 
-    createNewProduct(showModal, recordId){
+    handleModalPopUp(showModal, recordId){
         console.log(showModal + ' ' + recordId);
         const modalEditForm = this.template.querySelector('c-modal-edit-form');
         if (modalEditForm) {
@@ -164,6 +165,11 @@ export default class ProductList extends NavigationMixin(LightningElement) {
         }
     }
 
+
+    createNewProduct(){
+        this.handleModalPopUp(true, null);
+    }
+    
     handleRowAction(event){
         const actionName = event.detail.action.name;
         const row = event.detail.row;
@@ -182,7 +188,7 @@ export default class ProductList extends NavigationMixin(LightningElement) {
                 console.log(row + " " + actionName);
                 break;
             case 'delete':
-                this.handleRecordDelete(row.Id);
+                this.handleRecordDelete(row);
                 break;
             case 'edit':
                 this.handleModalPopUp(true, row.Id);
