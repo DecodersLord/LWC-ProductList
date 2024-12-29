@@ -45,7 +45,10 @@ const COLUMNS = [
     {
         label: 'Price',
         fieldName: PRICE_FIELD.fieldApiName,
-        type: 'text',
+        type: 'currency',
+        typeAttributes: {
+            currencyCode: 'CAD'
+        }
     },
     {
         type: 'action',
@@ -151,8 +154,7 @@ export default class ProductList extends NavigationMixin(LightningElement) {
         this.productCategory = productCategory;
     }
 
-    @api
-    handleModalPopUp(showModal, recordId){
+    createNewProduct(showModal, recordId){
         console.log(showModal + ' ' + recordId);
         const modalEditForm = this.template.querySelector('c-modal-edit-form');
         if (modalEditForm) {

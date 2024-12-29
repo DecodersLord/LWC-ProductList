@@ -13,16 +13,5 @@ export default class ProductBanner extends NavigationMixin(LightningElement) {
             console.error('c-product-list not found');
         }
     }
-    
-    createNewProduct() { 
-
-        const productList = this.template.querySelector('c-product-list');
-        if (productList) {
-            productList.handleModalPopUp(true, null);
-        } else {
-            console.error('c-product-list not found');
-        }
-    }
-
 
 }

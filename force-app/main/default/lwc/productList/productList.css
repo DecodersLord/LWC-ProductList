@@ -1,0 +1,5 @@
+.dataTables_scrollBody
+{
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+}

@@ -1,5 +1,11 @@
 <template>
     <lightning-card>
+        <lightning-button
+            variant="normal"
+            label="Add New Product"
+            slot="actions"
+            onclick={createNewProduct}
+        ></lightning-button>
         <template for:each={productsMapByCategory} for:item="category">
             <lightning-accordion key={category.key} allow-multiple-sections-open>
                     <lightning-accordion-section name={category.key} label={category.key}>

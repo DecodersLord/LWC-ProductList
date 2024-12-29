@@ -1,13 +1,7 @@
 <template>
 <lightning-layout class="x-large">
-    <lightning-layout-item size="2">
-        <lightning-card title="Refine Product Search">
-            <lightning-button
-                variant="normal"
-                label="New Product"
-                slot="actions"
-                onclick={createNewProduct}
-            ></lightning-button>
+    <lightning-layout-item size="2" >
+        <lightning-card title="Search Products">
             <p class="slds-var-p-horizontal_small">
                 <c-product-search-form oncategorychanged={getProductsByCategory}>
                 </c-product-search-form>
@@ -15,9 +9,6 @@
         </lightning-card>
     </lightning-layout-item>
     <lightning-layout-item size="10" class="slds-p-left_small slds-is-relative">
-            <template if:true={isLoading}>
-                <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
-            </template>
             <c-product-list onloading={handleLoading} ondoneloading={handleDoneLoading} ></c-product-list>
     </lightning-layout-item>
 </lightning-layout>

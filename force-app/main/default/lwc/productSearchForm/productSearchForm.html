@@ -2,7 +2,7 @@
 <lightning-layout>
         <lightning-layout-item class="slds-align-middle">
             <template if:true={searchOptions}>
-                <lightning-combobox class="slds-align-middle" name="productCategory" options={searchOptions} value={selectedCategory} 
+                <lightning-combobox class="slds-align-middle slds-text-title_bold" name="productCategory" options={searchOptions} value={selectedCategory} 
                 onchange={handleCategoryChange} label="Select Category: ">
                 </lightning-combobox>
             </template>
